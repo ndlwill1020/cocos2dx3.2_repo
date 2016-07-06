@@ -2,6 +2,7 @@
 #include "StringUtils.hpp"
 
 
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -27,14 +28,10 @@ bool HelloWorld::init()
         return false;
     }
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
+    visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
+    
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
@@ -43,34 +40,22 @@ bool HelloWorld::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
-    // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
     
-    auto label = LabelTTF::create("Hello World", "Arial", 24);
+//    auto helloWorld = Sprite::create("HelloWorld.png");
+//    helloWorld->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+//    this->addChild(helloWorld);
+
     
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+    //会卡。。。
+    blurSprite = BlurSprite::create("HelloWorld.png");
+    blurSprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    this->addChild(blurSprite);
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+    
+    
     
     
     auto list=StringTools::split("Zhangxl,aihaoguangfan,basketball,swim",",");
@@ -84,14 +69,32 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
-
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+    blurSprite->setBlurRadius(12.0f);
 }
+
+//CallFuncN * create(const std::function<void(Node*)>& func);
+RenderTexture* HelloWorld::ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback)
+{
+    auto winSize = Director::getInstance()->getWinSize();
+    RenderTexture *renderTexture = RenderTexture::create(winSize.width, winSize.height);
+    
+    renderTexture->beginWithClear(0.0f, 0.0f, 0.0f, 0.0f);
+    Director::getInstance()->getRunningScene()->visit();
+    renderTexture->end();
+    //Director::getInstance()->getRenderer()->render();
+    if (bIsSave) {
+        static int index = 0;
+        renderTexture->saveToFile(StringUtils::format("ScreenShot_%.2d.png",index++), Image::Format::PNG, true);
+    } else {
+        if (pFuncCallback != nullptr) {
+            pFuncCallback(renderTexture, "");
+        }
+    }
+    return renderTexture;
+}
+
+void HelloWorld::ScreenShot_Callback(RenderTexture* renderTesture, const std::string& str){
+
+}
+
+

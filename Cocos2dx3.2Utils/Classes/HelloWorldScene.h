@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "BlurSprite.hpp"
 USING_NS_CC;
 class HelloWorld : public cocos2d::Layer
 {
@@ -17,6 +18,16 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+    
+private:
+    RenderTexture* ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback);
+    
+    void ScreenShot_Callback(RenderTexture* renderTesture, const std::string& str);
+    
+    
+private:
+    Size visibleSize;
+    BlurSprite* blurSprite;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

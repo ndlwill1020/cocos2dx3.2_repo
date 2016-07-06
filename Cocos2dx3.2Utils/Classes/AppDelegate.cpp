@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-
+#include "TestShaderScene.hpp"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -28,7 +28,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = HelloWorld::createScene();
-
+    //auto scene = TestShaderScene::createScene();
+    
     // run
     director->runWithScene(scene);
 
