@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "StringUtils.hpp"
+#include "TCPSocket.hpp"
 
 
 
@@ -44,11 +45,13 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
-//    auto helloWorld = Sprite::create("HelloWorld.png");
-//    helloWorld->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-//    this->addChild(helloWorld);
-
     
+    
+    //test NetWork
+    //TCPSocket::isIpv6Network();
+    
+
+
     //会卡。。。
     blurSprite = BlurSprite::create("HelloWorld.png");
     blurSprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
@@ -69,8 +72,14 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
-    blurSprite->setBlurRadius(12.0f);
+    if (blurSprite) {
+        blurSprite->setBlurRadius(12.0f);
+    }
 }
+
+
+
+//============================================================
 
 //CallFuncN * create(const std::function<void(Node*)>& func);
 RenderTexture* HelloWorld::ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback)
