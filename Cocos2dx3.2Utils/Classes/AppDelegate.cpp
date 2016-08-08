@@ -32,10 +32,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     
-    auto scene = DrawTextureScene::createScene();
+    //auto scene = DrawTextureScene::createScene();
     //auto scene = DrawCubeScene::createScene();
     //auto scene = DrawQuadScene::createScene();
-    //auto scene = HelloWorld::createScene();
+    auto scene = HelloWorld::createScene();
     //auto scene = TestShaderScene::createScene();
     
     // run

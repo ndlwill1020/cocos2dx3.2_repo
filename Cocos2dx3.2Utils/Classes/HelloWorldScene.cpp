@@ -2,7 +2,7 @@
 #include "StringUtils.hpp"
 #include "TCPSocket.hpp"
 
-
+#include "ShaderUtils.hpp"
 
 
 Scene* HelloWorld::createScene()
@@ -51,29 +51,41 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
+    auto bg = LayerColor::create(Color4B::GREEN);
+    bg->setPosition(Vec2::ZERO);
+    this->addChild(bg, -1);
+    
+    //test for shadow
+//    auto role = Sprite::create("role.png");
+//    role->setScale(2.0f);
+//    role->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+//    auto program = GLProgram::createWithFilenames("shadow.vert", "shadow.frag");
+//    role->setGLProgram(program);
+//    this->addChild(role, 1);
+    
+    //test for stroke  效率不高～
+    auto logo = Sprite::create("role.png");
+    logo->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    logo->setGLProgramState(ShaderUtils::getTextureStrokeProgramState(5.0f, Color3B::RED, logo->getContentSize()));
+    this->addChild(logo, 1);
     
     
-    //test NetWork
+    //test for NetWork
     //TCPSocket::isIpv6Network();
     
     
-    
-    
-    //StringTools::hasSubString("abccddd", "cd");
-
+    //test for blurSprite
     //会卡。。。
-    blurSprite = BlurSprite::create("HelloWorld.png");
-    blurSprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    this->addChild(blurSprite);
+//    blurSprite = BlurSprite::create("HelloWorld.png");
+//    blurSprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+//    this->addChild(blurSprite);
 
-    
-    
-    
-    
-    auto list=StringTools::split("Zhangxl,aihaoguangfan,basketball,swim",',');
-    for(int i=0;i<list.size();i++){
-        log("%s",list.at(i).c_str());
-    }
+
+    //test for StringTools
+//    auto list=StringTools::split("Zhangxl,aihaoguangfan,basketball,swim",',');
+//    for(int i=0;i<list.size();i++){
+//        log("%s",list.at(i).c_str());
+//    }
     
     return true;
 }

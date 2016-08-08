@@ -23,8 +23,6 @@ public:
      *  @return 拆分后的字符串数组
      */
     static std::vector<std::string> split(std::string str,const char symbol);
-    
-    
 };
 
 #endif /* StringUtils_hpp */
