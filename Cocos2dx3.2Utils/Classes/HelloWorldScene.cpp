@@ -64,10 +64,17 @@ bool HelloWorld::init()
 //    this->addChild(role, 1);
     
     //test for stroke  效率不高～
-    auto logo = Sprite::create("role.png");
-    logo->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    logo->setGLProgramState(ShaderUtils::getTextureStrokeProgramState(5.0f, Color3B::RED, logo->getContentSize()));
-    this->addChild(logo, 1);
+//    auto logo = Sprite::create("role.png");
+//    logo->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+//    logo->setGLProgramState(ShaderUtils::getTextureStrokeProgramState(5.0f, Color3B::RED, logo->getContentSize()));
+//    this->addChild(logo, 1);
+    
+    //test for hsv
+    auto cocos = Sprite::create("HelloWorld.png");
+    cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
+    this->addChild(cocos, 1);
+    
     
     
     //test for NetWork

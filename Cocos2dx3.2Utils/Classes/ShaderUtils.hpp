@@ -16,6 +16,8 @@ USING_NS_CC;
 namespace ShaderUtils {
     //描边宽度(像素),描边颜色，图片大小
     GLProgramState *getTextureStrokeProgramState(float strokeWidth, Color3B strokeColor, Size textureSize);
+    //hsv增减量
+    GLProgramState *getHSVProgramState(float h, float s, float v);
 }
 
 #endif /* ShaderUtils_hpp */

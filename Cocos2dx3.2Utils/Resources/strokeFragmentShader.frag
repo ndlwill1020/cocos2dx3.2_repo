@@ -13,6 +13,9 @@ varying vec2 v_texCoord;
 //const float cosArray[12] = {1, 0.866, 0.5, 0, -0.5, -0.866, -0.1, -0.866, -0.5, 0, 0.5, 0.866};
 //const float sinArray[12] = {0, 0.5, 0.866, 1, 0.866, 0.5, 0, -0.5, -0.866, -1, -0.866, -0.5};
 
+//vec4 cosArray[3] = vec4[]((1.0, 0.866, 0.5, 0.0), (-0.5, -0.866, -0.1, -0.866), (-0.5, 0.0, 0.5, 0.866));
+//vec4 sinArray[3] = vec4[]((0.0, 0.5, 0.866, 1), (0.866, 0.5, 0.0, -0.5), (-0.866, -1.0, -0.866, -0.5));
+
 
 //判断当前像素点在这个角度上距离为outlineSize那一点是不是透明
 int isTransparentPixelWithAngleIndex(int index, int subIndex){
@@ -32,11 +35,12 @@ int isTransparentPixelWithAngleIndex(int index, int subIndex){
 
 void main(){
     vec4 pixelColor = texture2D(CC_Texture0, v_texCoord);
-    
     if (pixelColor.a >= 0.5) {
         gl_FragColor = v_fragmentColor * pixelColor;
         return;
     }
+    
+    
     
     int strokeCount = 0;
     strokeCount += isTransparentPixelWithAngleIndex(0, 0);

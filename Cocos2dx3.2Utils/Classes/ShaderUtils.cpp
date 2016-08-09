@@ -9,6 +9,7 @@
 #include "ShaderUtils.hpp"
 
 const char* strokeShaderName = "stroke_shader";
+const char* hsvShaderName = "hsv_shader";
 
 namespace ShaderUtils {
     GLProgramState *getTextureStrokeProgramState(float strokeWidth, Color3B strokeColor, Size textureSize){
@@ -58,6 +59,22 @@ namespace ShaderUtils {
         programState->setUniformVec2("u_texSize", Vec2(textureSize.width, textureSize.height));
         
         
+        
+        return programState;
+    }
+    
+    
+    GLProgramState *getHSVProgramState(float h, float s, float v){
+        auto program = GLProgramCache::getInstance()->getGLProgram(hsvShaderName);
+        if (!program) {
+            std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("hsv.frag");
+            program = GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragmentShaderSource.c_str());
+            GLProgramCache::getInstance()->addGLProgram(program, strokeShaderName);
+        }
+        auto programState = GLProgramState::create(program);
+        programState->setUniformFloat("u_h", h);
+        programState->setUniformFloat("u_s", s);
+        programState->setUniformFloat("u_v", v);
         
         return programState;
     }
