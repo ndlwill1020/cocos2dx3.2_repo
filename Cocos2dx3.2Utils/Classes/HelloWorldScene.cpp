@@ -70,11 +70,26 @@ bool HelloWorld::init()
 //    this->addChild(logo, 1);
     
     //test for hsv
+//    auto cocos = Sprite::create("HelloWorld.png");
+//    cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+//    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
+//    this->addChild(cocos, 1);
+
     auto cocos = Sprite::create("HelloWorld.png");
     cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
-    this->addChild(cocos, 1);
+    //test for gray
+    //std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("gray.frag");
     
+    //test for ic_flower_blur
+    //std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("ice_flower_blur.frag");
+    
+    //test for GaussianBlur
+    //std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("GaussianBlur.frag");
+    
+    //test for Emboss
+    std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("Emboss.frag");
+    cocos->setGLProgram(GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragmentShaderSource.c_str()));
+    this->addChild(cocos, 1);
     
     
     //test for NetWork

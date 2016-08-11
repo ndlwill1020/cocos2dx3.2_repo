@@ -54,7 +54,6 @@ void main(){
         r = g = b = temp_v;
     } else {
         temp_h /= 60.0;
-        //int iH = (int)temp_h;
         int iH = int(temp_h);
         float f = temp_h - float(iH);
         x = temp_v * (1.0 - temp_s);
