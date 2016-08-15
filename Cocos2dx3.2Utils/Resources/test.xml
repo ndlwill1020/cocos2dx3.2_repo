@@ -1,0 +1,6 @@
+<font type = '字体' color = 'ff0000' size = '60' opacity = '255'>
+你好<image src = '图片' color = 'ff0000' opacity = '255' /><font type = '新字体'>ndl</font>
+<br />
+<font color = '00ff00' size = '80'>green</font>
+<font color = '0000ff'>blue</font>
+</font>

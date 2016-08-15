@@ -36,6 +36,7 @@ std::vector<std::string> StringTools::split(std::string str,const char symbol){
     size_t endIndex = 0;
     endIndex = str.find(symbol);//从0开始
     
+    
     log("endIndex:%zu",endIndex);
     
     std::string splitStr="";

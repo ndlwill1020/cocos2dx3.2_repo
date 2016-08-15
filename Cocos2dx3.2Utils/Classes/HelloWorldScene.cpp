@@ -4,6 +4,8 @@
 
 #include "ShaderUtils.hpp"
 
+#include "SuperRichText.hpp"
+
 
 Scene* HelloWorld::createScene()
 {
@@ -51,9 +53,9 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
-    auto bg = LayerColor::create(Color4B::GREEN);
-    bg->setPosition(Vec2::ZERO);
-    this->addChild(bg, -1);
+//    auto bg = LayerColor::create(Color4B::GREEN);
+//    bg->setPosition(Vec2::ZERO);
+//    this->addChild(bg, -1);
     
     //test for shadow
 //    auto role = Sprite::create("role.png");
@@ -75,6 +77,9 @@ bool HelloWorld::init()
 //    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
 //    this->addChild(cocos, 1);
 
+    
+    //test for shaders
+    /*
     auto cocos = Sprite::create("HelloWorld.png");
     cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     //test for gray
@@ -90,6 +95,22 @@ bool HelloWorld::init()
     std::string fragmentShaderSource = FileUtils::getInstance()->getStringFromFile("Emboss.frag");
     cocos->setGLProgram(GLProgram::createWithByteArrays(ccPositionTextureColor_noMVP_vert, fragmentShaderSource.c_str()));
     this->addChild(cocos, 1);
+     */
+    
+    //test for SuperRichText
+    auto richText = SuperRichText::create();
+    richText->setPosition(visibleSize / 2);
+    richText->renderHtml(" \
+<font color = 'ffffff' size = '60' opacity = '255'> \
+<font color = 'ff0000'>你好</font> \
+<image src = 'CloseNormal.png' /> \
+<font color = '0000ff' name = 'fonts/Marker Felt.ttf'>ndl</font> \
+<br /> \
+我<font size = '80' color = 'ff00ff'>是第二行</font>\
+<br /> \
+我是第三行\
+</font>");
+    this->addChild(richText);
     
     
     //test for NetWork
