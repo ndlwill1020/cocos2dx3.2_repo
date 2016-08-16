@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "BlurSprite.hpp"
+#include "VirtualHandle/VirtualHandle.hpp"
 USING_NS_CC;
 class HelloWorld : public cocos2d::Layer
 {
@@ -23,6 +24,8 @@ private:
     RenderTexture* ScreenShot(const bool bIsSave, std::function<void(cocos2d::RenderTexture*, const std::string&)> pFuncCallback);
     
     void ScreenShot_Callback(RenderTexture* renderTesture, const std::string& str);
+    
+    void virtualHandle_Callback(VirtualHandleEvent event);
     
     
 private:

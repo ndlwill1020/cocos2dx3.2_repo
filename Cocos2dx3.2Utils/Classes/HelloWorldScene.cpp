@@ -7,6 +7,8 @@
 #include "SuperRichText.hpp"
 
 
+
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -98,19 +100,64 @@ bool HelloWorld::init()
      */
     
     //test for SuperRichText
-    auto richText = SuperRichText::create();
-    richText->setPosition(visibleSize / 2);
-    richText->renderHtml(" \
-<font color = 'ffffff' size = '60' opacity = '255'> \
-<font color = 'ff0000'>你好</font> \
-<image src = 'CloseNormal.png' /> \
-<font color = '0000ff' name = 'fonts/Marker Felt.ttf'>ndl</font> \
-<br /> \
-我<font size = '80' color = 'ff00ff'>是第二行</font>\
-<br /> \
-我是第三行\
-</font>");
-    this->addChild(richText);
+//    auto richText = SuperRichText::create();
+//    richText->setPosition(visibleSize / 2);
+//    richText->renderHtml(" \
+//<font color = 'ffffff' size = '60' opacity = '255'> \
+//<font color = 'ff0000'>你好</font> \
+//<image src = 'CloseNormal.png' /> \
+//<font color = '0000ff' name = 'fonts/Marker Felt.ttf'>ndl</font> \
+//<br /> \
+//我<font size = '80' color = 'ff00ff'>是第二行</font>\
+//<br /> \
+//我是第三行\
+//</font>");
+//    this->addChild(richText);
+    
+    //test for Virtualhandle
+    auto virtualHandle = VirtualHandle::create();
+    virtualHandle->setPosition(Vec2::ZERO);
+    //virtualHandle->setPosition(0.0f, visibleSize.height * 0.2f);
+    this->addChild(virtualHandle);
+    
+    //virtualHandle->setCallback(std::bind(&HelloWorld::virtualHandle_Callback, this, std::placeholders::_1));
+    //virtualHandle->setCallback(CC_CALLBACK_1(HelloWorld::virtualHandle_Callback, this));
+    virtualHandle->setCallback([](VirtualHandleEvent event){
+        std::string value = "";
+        switch (event) {
+            case VirtualHandleEvent::A:
+                value = "A";
+                break;
+            case VirtualHandleEvent::B:
+                value = "B";
+                break;
+            case VirtualHandleEvent::CANCEL_A:
+                value = "CANCEL_A";
+                break;
+            case VirtualHandleEvent::CANCEL_B:
+                value = "CANCEL_B";
+                break;
+            case VirtualHandleEvent::LEFT:
+                value = "LEFT";
+                break;
+            case VirtualHandleEvent::RIGHT:
+                value = "RIGHT";
+                break;
+            case VirtualHandleEvent::CANCEL_LEFT:
+                value = "CANCEL_LEFT";
+                break;
+            case VirtualHandleEvent::CANCEL_RIGHT:
+                value = "CANCEL_RIGHT";
+                break;
+                
+            default:
+                break;
+        }
+        
+        log("%s", value.c_str());
+    
+    });
+    
     
     
     //test for NetWork
@@ -131,6 +178,41 @@ bool HelloWorld::init()
 //    }
     
     return true;
+}
+
+void HelloWorld::virtualHandle_Callback(VirtualHandleEvent event){
+    std::string value = "";
+    switch (event) {
+        case VirtualHandleEvent::A:
+            value = "A";
+            break;
+        case VirtualHandleEvent::B:
+            value = "B";
+            break;
+        case VirtualHandleEvent::CANCEL_A:
+            value = "CANCEL_A";
+            break;
+        case VirtualHandleEvent::CANCEL_B:
+            value = "CANCEL_B";
+            break;
+        case VirtualHandleEvent::LEFT:
+            value = "LEFT";
+            break;
+        case VirtualHandleEvent::RIGHT:
+            value = "RIGHT";
+            break;
+        case VirtualHandleEvent::CANCEL_LEFT:
+            value = "CANCEL_LEFT";
+            break;
+        case VirtualHandleEvent::CANCEL_RIGHT:
+            value = "CANCEL_RIGHT";
+            break;
+            
+        default:
+            break;
+    }
+    
+    log("%s", value.c_str());
 }
 
 
