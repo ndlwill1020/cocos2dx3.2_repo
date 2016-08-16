@@ -59,6 +59,7 @@ bool VirtualHandle::init(){
     EventDispatcher* eventDispatcher = Director::getInstance()->getEventDispatcher();
     auto listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = [this](Touch* touch, Event* event){
+        log("begin!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         auto touchPoint = touch->getLocation();
         log("%f %f",touchPoint.x, touchPoint.y);
         auto containerBound = rockerContainer->getBoundingBox();
@@ -115,6 +116,7 @@ bool VirtualHandle::init(){
             rockerWay = 1;
             cancelRockerWay();
         }
+        rockerLastPointX = point.x;
         moveRockerPosition(point);
     };
     listener->onTouchEnded = [this](Touch* touch, Event* event){
