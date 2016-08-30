@@ -6,8 +6,10 @@
 
 #include "SuperRichText.hpp"
 
+#include "CommonTools.hpp"
 
 
+#define MAX_VALUE 5
 
 Scene* HelloWorld::createScene()
 {
@@ -55,6 +57,19 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
+//    timeval tv;
+//    gettimeofday(&tv, NULL);
+//    unsigned long rand_seed = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+//    srand((unsigned)rand_seed);
+    
+    srand((unsigned)time(NULL));
+    int count = 10;
+    while (count > 0) {
+        //log("%d", rand() % MAX_VALUE);//[0,MAX_VALUE - 1]
+        log("%d", CommonTools::getRandom(5, 0));
+        count--;
+    }
+    
 //    auto bg = LayerColor::create(Color4B::GREEN);
 //    bg->setPosition(Vec2::ZERO);
 //    this->addChild(bg, -1);
@@ -74,10 +89,10 @@ bool HelloWorld::init()
 //    this->addChild(logo, 1);
     
     //test for hsv
-//    auto cocos = Sprite::create("HelloWorld.png");
-//    cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-//    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
-//    this->addChild(cocos, 1);
+    auto cocos = Sprite::create("HelloWorld.png");
+    cocos->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    cocos->setGLProgramState(ShaderUtils::getHSVProgramState(120.0f, 0.0f, 0.0f));
+    this->addChild(cocos, 1);
 
     
     //test for shaders
