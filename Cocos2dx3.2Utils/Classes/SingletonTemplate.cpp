@@ -8,4 +8,21 @@
 
 #include "SingletonTemplate.hpp"
 
-//template <class T>
+template <class T>
+T* SingletonTemplate<T>::_instance = nullptr;
+
+template <class T>
+T* SingletonTemplate<T>::getInstance(){
+    if (!_instance) {
+        _instance = new T();
+    }
+    return _instance;
+}
+
+template <class T>
+void SingletonTemplate<T>::destroyInstance(){
+    if (_instance) {
+        delete _instance;
+        _instance = nullptr;
+    }
+}

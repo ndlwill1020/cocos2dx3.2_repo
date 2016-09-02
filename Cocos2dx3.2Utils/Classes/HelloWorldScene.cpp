@@ -175,6 +175,17 @@ bool HelloWorld::init()
     
     
     
+    //test
+    this->runAction(Sequence::create(DelayTime::create(5.0f), CallFunc::create([](){
+        log("callback");
+    }) , NULL));
+    
+    this->runAction(Sequence::create(DelayTime::create(2.0f), CallFunc::create([this](){
+        log("second callback");
+        this->stopAllActions();//上面的action的cb 会被停止不执行
+    }) , NULL));
+    
+    
     //test for NetWork
     //TCPSocket::isIpv6Network();
     
