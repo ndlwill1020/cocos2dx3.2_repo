@@ -11,6 +11,9 @@
 
 #include "cocos2d.h"
 USING_NS_CC;
+
+
+
 //IPv4是“.”来分割的，但是IPv6是“:”来分割的
 
 class TCPSocket{

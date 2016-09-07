@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "StringUtils.hpp"
+
 #include "TCPSocket.hpp"
 
 #include "ShaderUtils.hpp"
@@ -10,6 +11,11 @@
 
 
 #define MAX_VALUE 5
+
+//#define JDJ "NN100"
+#include "Test.h"
+#define JDJ "NN200"
+
 
 Scene* HelloWorld::createScene()
 {
@@ -32,7 +38,7 @@ bool HelloWorld::init()
     //当文件（如数据库文件，游戏配置文件）的md5不符时，退出游戏
     //进行MD5数值对比，也就是MD5校验。由于MD5加密不可逆算，如果数值一样，那就表示文件没有被修改的。反之，则被修改了
 
-    
+    log("!!!!!!!!!!!!!!!!!!%d",NN);
     
     //////////////////////////////
     // 1. super init first
@@ -184,6 +190,9 @@ bool HelloWorld::init()
         log("second callback");
         this->stopAllActions();//上面的action的cb 会被停止不执行
     }) , NULL));
+    
+    //test array  数组作为参数(传地址)，传入函数，修改数组，原来的数组也改变
+    
     
     
     //test for NetWork
