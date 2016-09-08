@@ -18,11 +18,13 @@ USING_NS_CC;
 
 class TCPSocket{
 public:
-    //判断是否IPv6网络
-    static bool isIpv6Network(const std::string& domainStr = "www.baidu.com");
     
+    
+private:
+    //判断是否IPv6网络
+    bool isIpv6Network(const std::string& domainStr = "www.baidu.com");
     //域名解析函数
-    static std::string domain2Ip(const char* pDomain);
+    std::string domain2Ip(const char* pDomain);
 };
 
 #endif /* TCPSocket_hpp */
