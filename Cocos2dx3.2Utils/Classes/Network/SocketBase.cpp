@@ -124,7 +124,8 @@ namespace Net {
         return ret;
     }
     
-    int setNonblcok(SOCKET sockfd, int flags, bool isOn){
+    //int flags
+    int setNonblcok(SOCKET sockfd, bool isOn){
         if (sockfd == INVALID_SOCKET) {
             return -1;
         }
@@ -133,9 +134,9 @@ namespace Net {
             return -1;
         }
         if (isOn) {
-            originFlag |= O_NONBLOCK;
+            originFlag |= O_NONBLOCK;//flags
         } else {
-            originFlag &= ~O_NONBLOCK;
+            originFlag &= ~O_NONBLOCK;//flags
         }
         if (fcntl(sockfd, F_SETFL, originFlag) < 0) {
             return -1;
@@ -308,6 +309,14 @@ namespace Net {
         }
         return 0;
         
+    }
+    
+    int getError(SOCKET sockfd){
+        int so_error = 0;
+        unsigned int len = sizeof(so_error);
+        //reinterpret_cast 它可以把一个指针转换成一个整数，也可以把一个整数转换成一个指针
+        getsockopt(sockfd, SOL_SOCKET, SO_ERROR, reinterpret_cast<char *>(&so_error), &len);
+        return so_error;
     }
 }
 

@@ -25,11 +25,12 @@ namespace Net {
     
     /*
      usage:
-     setNonblcok(sockfd, O_NONBLOCK, true);//开启O_NONBLOCK
-     setNonblcok(sockfd, O_NONBLOCK, false);//关闭O_NONBLOCK
+     //int flags  ->  O_NONBLOCK
+     setNonblcok(sockfd, true);//开启O_NONBLOCK
+     setNonblcok(sockfd, false);//关闭O_NONBLOCK
      success:0 fail:-1
      */
-    int setNonblcok(SOCKET sockfd, int flags, bool isOn);
+    int setNonblcok(SOCKET sockfd, bool isOn);
     int setKeepAlive(SOCKET sockfd, int optval = 1);
     
     int setReuseaddr(SOCKET sockfd, int optval);//for server
@@ -44,6 +45,8 @@ namespace Net {
     
     
     int getPeerAddr(SOCKET sockfd, char* ip, int* port);//获得客户端的ip和端口   for server
+    
+    int getError(SOCKET sockfd);
 }
 
 
